@@ -10,12 +10,12 @@ conf = SparkConf().setMaster('local').setAppName('user_cluster')
 sc = SparkContext(conf = conf)
 
 # 从文件中读取数据，并把数据转化为特定的数据结构
-data = sc.textFile('/home/song/workspace/python/user.txt')
+data = sc.textFile('./userData.txt')
 print('lines:' + str(data.count())); 
-parseDate = data.map(lambda line : array([float(x) for x in line.split(' ')]));
+parseData = data.map(lambda line : array([float(x) for x in line.split(' ')]));
 
 # 通过训练得到模型参数
-clusters = KMeans.train(parseData, 2, maxIteration=10000, initializationMode="random")
+clusters = KMeans.train(parseData, 2, maxIterations=10000, initializationMode="random")
 
 # 保存模型参数
 modePath = '/home/song/workspace/userCluster/userClusterModel'
